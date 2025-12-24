@@ -23,6 +23,7 @@ type Props = {
   };
 };
 
+//Cambios con try/catch para manejar errores en las búsquedas 
 export default async function HomePage({ searchParams }: Props) {
   const sp = await searchParams;
   const page = Number(sp?.page ?? "1");
