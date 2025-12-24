@@ -1,14 +1,20 @@
 // components/layout/AppHeader.tsx
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Container } from "@/components/layout/Container";
 
 export function AppHeader() {
+  const router = useRouter();
   const [id, setId] = useState("");
+
+  // Normalizamos: quitamos espacios y validamos que sea número entero positivo
+  const cleaned = useMemo(() => id.trim(), [id]);
+  const isValidId = useMemo(() => /^\d+$/.test(cleaned) && Number(cleaned) > 0, [cleaned]);
 
   return (
     <header className="sticky top-0 z-50 border-b bg-white/70 backdrop-blur">
@@ -24,7 +30,10 @@ export function AppHeader() {
           className="flex w-full max-w-sm items-center gap-2"
           onSubmit={(e) => {
             e.preventDefault();
-            // Más adelante: navegación a /character/{id} o try it out
+            if (!isValidId) return;
+
+            router.push(`/character/${cleaned}`);
+            setId("");
           }}
         >
           <Input
@@ -32,8 +41,14 @@ export function AppHeader() {
             onChange={(e) => setId(e.target.value)}
             placeholder="Search character by ID"
             className="bg-white"
+            inputMode="numeric"
           />
-          <Button type="submit" className="bg-emerald-500 hover:bg-emerald-600">
+
+          <Button
+            type="submit"
+            className="bg-emerald-500 hover:bg-emerald-600"
+            disabled={!isValidId}
+          >
             Go
           </Button>
         </form>
