@@ -113,8 +113,11 @@ lib/
 
 
 ## Deployment
-The application is deployed on Vercel.
+### a) The application has been deployed on Vercel.
 https://rickmorty-api-docs-vercel.vercel.app/
+
+### b) CodeSandbox.
+https://codesandbox.io/p/github/NicoJRM/rickmorty-api-docs/main
 
 
 ## Questions
