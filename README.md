@@ -53,7 +53,7 @@ This project uses Next.js with the App Router to leverage server-side rendering,
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```txt
 app/
